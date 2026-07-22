@@ -15,47 +15,48 @@ Open http://localhost:3000
 
 ## Does the email actually work?
 
-**Yes — once you add one email API key.** No email system can send without an
-authenticated sender, so there is one short setup step:
+**Yes — it sends through Microsoft Graph (app-only).** No email system can send
+without authenticated credentials, so there is one setup step using your Azure
+app registration.
 
-1. Create a free account at https://resend.com
-2. Copy `.env.local.example` to `.env.local`
-3. Paste your key:
+1. Copy `.env.local.example` to `.env.local`
+2. Fill in the three values from Azure plus the sender/recipient:
 
 ```
-RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
+MS_TENANT_ID=your-tenant-id
+MS_CLIENT_ID=your-application-client-id
+MS_CLIENT_SECRET=your-client-secret-value
+MS_SENDER=salman.ansari@caito360.ai
+TO_EMAIL=salman.ansari@caito360.ai
 ```
 
-4. Restart `npm run dev`. Submit the form → the application + resume land in the inbox.
+3. Restart `npm run dev`. Submit the form → the application + resume land in the inbox.
 
-Until the key is set, the form shows a clear message:
-*"Email is not configured yet. Add RESEND_API_KEY…"* (so nothing fails silently).
+Until the credentials are set, the form shows a clear message:
+*"Email is not configured yet. Add MS_TENANT_ID…"* (so nothing fails silently).
 
-### Sender address
-- **Testing:** leave `FROM_EMAIL` unset — it uses Resend's shared test sender
-  (`onboarding@resend.dev`). Emails go to your `TO_EMAIL`.
-- **Production:** verify the `caito360.ai` domain in Resend (add the DNS records
-  they give you), then set `FROM_EMAIL="Caito360 AI Academy <academy@caito360.ai>"`.
+### Azure app registration requirements
+The app registration (Microsoft Entra ID → App registrations) must have:
+- **API permission:** `Mail.Send` of type **Application** (not Delegated),
+  with **admin consent granted**.
+- **A client secret** (Certificates & secrets → New client secret). Copy the
+  secret **Value** — not the Secret ID.
+- **MS_SENDER** must be a real, licensed mailbox in the tenant. With app-only
+  `Mail.Send`, the app can send as any mailbox unless your admin scoped it with
+  an Application Access Policy — if sends fail with "Access denied", ask your
+  admin to include `MS_SENDER` in that policy.
 
-### Prefer SMTP instead of Resend?
-Swap the provider in `app/api/apply/route.js` for Nodemailer:
+### How it works
+`app/api/apply/route.js` does two calls with plain `fetch` (no SDK):
+1. `POST https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token`
+   (grant_type `client_credentials`, scope `https://graph.microsoft.com/.default`)
+2. `POST https://graph.microsoft.com/v1.0/users/{MS_SENDER}/sendMail`
+   with the resume as a base64 `fileAttachment`.
 
-```bash
-npm install nodemailer
-```
-
-```js
-import nodemailer from "nodemailer";
-const t = nodemailer.createTransport({
-  host: process.env.SMTP_HOST, port: 587,
-  auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-});
-await t.sendMail({
-  from: process.env.FROM_EMAIL, to: process.env.TO_EMAIL,
-  replyTo: email, subject: `New AI Academy Application — ${name}`,
-  html, attachments: [{ filename: file.name, content: buffer }],
-});
-```
+### Attachment size
+Graph's direct `sendMail` sends the file inline, so keep resumes under **~3 MB**
+(the route enforces this). Larger files require an upload session
+(`createUploadSession`) — tell me if you need that added.
 
 ## Deploy
 
