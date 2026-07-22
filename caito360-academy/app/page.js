@@ -7,7 +7,7 @@ const PHOTOS = [
   { src: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600&q=70&auto=format&fit=crop", cap: "Build", alt: "Hands-on automation session" },
   { src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=70&auto=format&fit=crop", cap: "Get mentored", alt: "Mentorship and teamwork" },
   { src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=70&auto=format&fit=crop", cap: "Strategize", alt: "Strategy whiteboarding" },
-  { src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=70&auto=format&fit=crop", cap: "Deliver", alt: "Deployed AI practitioner at work" },
+  { src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=70&auto=format&fit=crop", cap: "Deliver", alt: "AI practitioner delivering client work" },
 ];
 
 // Curriculum-aligned skills (from the AI Automation program)
@@ -177,10 +177,11 @@ export default function Home() {
           <div>
             <h1 className="reveal">
               <span className="line1"><span className="l">Learn.</span> <span className="e">Earn.</span></span>
-              <span className="n">Now.<i className="speed" aria-hidden="true" /></span>
+              <span className="n">NOW.</span>
             </h1>
             <p className="lead reveal">
-              Master AI Automation. Start earning on real projects.
+              <b className="hl-blue">Master</b> AI Automation. Start <b className="hl-green">Earning</b>
+              <svg className="dollar-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="rgb(133,187,101)" strokeWidth="2" /><path d="M12 6v12M9.2 9a3 2.4 0 0 1 5.6 0c0 3-5.6 1.8-5.6 4.5a3 2.4 0 0 0 5.6 0" stroke="rgb(133,187,101)" strokeWidth="1.8" strokeLinecap="round" /></svg>
             </p>
             <div className="hero-actions reveal">
               <a href="#apply" onClick={scrollTo("apply")} className="btn btn-primary">Start Your Application →</a>
@@ -189,51 +190,54 @@ export default function Home() {
           </div>
           <div className="reveal">
             <div className="hero-visual">
-              <svg viewBox="0 0 460 470" width="100%" height="100%" fill="none" aria-label="Your journey: beginner to skilled, deployed and earning AI practitioner">
+              <svg viewBox="0 0 460 400" width="100%" height="100%" fill="none" aria-label="Sequential journey: you learn and master AI at Caito360, then you earn">
                 <defs>
-                  <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stopColor="#2FE0C6" /><stop offset="1" stopColor="#4C7DFF" /></linearGradient>
+                  <linearGradient id="lg" x1="0" y1="1" x2="1" y2="0">
+                    <stop stopColor="rgb(37,99,235)" /><stop offset="0.5" stopColor="var(--gold)" /><stop offset="1" stopColor="rgb(133,187,101)" />
+                  </linearGradient>
                   <radialGradient id="core"><stop stopColor="#123056" /><stop offset="1" stopColor="#0C1730" /></radialGradient>
-                  <radialGradient id="you"><stop stopColor="#0f2a3f" /><stop offset="1" stopColor="#0C1730" /></radialGradient>
+                  <radialGradient id="you"><stop stopColor="#0f2447" /><stop offset="1" stopColor="#0C1730" /></radialGradient>
+                  <radialGradient id="earn"><stop stopColor="#12331f" /><stop offset="1" stopColor="#0C1730" /></radialGradient>
                 </defs>
-                <g stroke="url(#line)" strokeWidth="1.8" opacity=".5">
-                  <path d="M95 210 L215 210" />
-                  <path d="M250 190 C320 150 340 130 388 118" fill="none" />
-                  <path d="M255 210 L360 210" />
-                  <path d="M250 232 C320 272 340 292 388 304" fill="none" />
-                </g>
-                <g>
-                  <circle r="4" fill="var(--teal)"><animateMotion dur="2.8s" repeatCount="indefinite" path="M95 210 L215 210 M250 190 C320 150 340 130 388 118" /></circle>
-                  <circle r="4" fill="var(--gold)"><animateMotion dur="3.2s" repeatCount="indefinite" path="M95 210 L215 210 M255 210 L360 210" /></circle>
-                  <circle r="4" fill="var(--cyan)"><animateMotion dur="3.6s" repeatCount="indefinite" path="M95 210 L215 210 M250 232 C320 272 340 292 388 304" /></circle>
-                </g>
-                {/* YOU */}
-                <circle cx="70" cy="210" r="34" fill="url(#you)" stroke="var(--cyan)" strokeWidth="1.6" />
-                <g stroke="var(--cyan)" strokeWidth="2" fill="none"><circle cx="70" cy="200" r="7" /><path d="M56 224c0-8 6-12 14-12s14 4 14 12" strokeLinecap="round" /></g>
-                <text x="70" y="266" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="12" fill="#fff" fontWeight="700">YOU</text>
-                <text x="70" y="282" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="9.5" fill="var(--muted)">beginner</text>
-                {/* ACADEMY */}
-                <circle cx="230" cy="210" r="46" fill="url(#core)" stroke="var(--gold)" strokeWidth="2"><animate attributeName="r" values="46;49;46" dur="3s" repeatCount="indefinite" /></circle>
+
+                {/* faint rising guide */}
+                <path d="M40 340 L420 60" stroke="var(--line)" strokeWidth="1.5" strokeDasharray="2 8" opacity=".5" />
+
+                {/* sequential connecting path (single line, one direction) */}
+                <path d="M92 292 L196 224 M264 188 L368 120" stroke="url(#lg)" strokeWidth="2.6" strokeLinecap="round" />
+                {/* direction chevrons */}
+                <path d="M150 262l7-4-1 8" stroke="var(--gold)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                <path d="M322 152l7-4-1 8" stroke="rgb(133,187,101)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                {/* single pulse travelling the whole sequence */}
+                <circle r="4.5" fill="var(--gold)">
+                  <animateMotion dur="3.4s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" path="M92 292 L200 222 L264 188 L368 120" />
+                </circle>
+
+                {/* 1 — YOU (start) */}
+                <circle cx="66" cy="312" r="34" fill="url(#you)" stroke="rgb(37,99,235)" strokeWidth="1.8" />
+                <g stroke="rgb(37,99,235)" strokeWidth="2" fill="none"><circle cx="66" cy="302" r="7" /><path d="M52 326c0-8 6-12 14-12s14 4 14 12" strokeLinecap="round" /></g>
+                <text x="66" y="366" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="12" fill="#fff" fontWeight="700">YOU</text>
+                <text x="66" y="382" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="9.5" fill="var(--muted)">beginner</text>
+
+                {/* 2 — LEARN / Master AI at Caito360 */}
+                <circle cx="230" cy="206" r="46" fill="url(#core)" stroke="var(--gold)" strokeWidth="2">
+                  <animate attributeName="r" values="46;49;46" dur="3s" repeatCount="indefinite" />
+                </circle>
                 <g opacity=".9">
-                  <circle cx="230" cy="210" r="30" stroke="var(--teal)" strokeWidth="1" fill="none" opacity=".5" />
-                  <circle cx="230" cy="176" r="3.5" fill="var(--teal)"><animateTransform attributeName="transform" type="rotate" from="0 230 210" to="360 230 210" dur="9s" repeatCount="indefinite" /></circle>
-                  <circle cx="260" cy="210" r="3" fill="var(--cyan)"><animateTransform attributeName="transform" type="rotate" from="120 230 210" to="480 230 210" dur="9s" repeatCount="indefinite" /></circle>
-                  <circle cx="205" cy="230" r="3" fill="var(--gold)"><animateTransform attributeName="transform" type="rotate" from="240 230 210" to="600 230 210" dur="9s" repeatCount="indefinite" /></circle>
+                  <circle cx="230" cy="206" r="30" stroke="var(--teal)" strokeWidth="1" fill="none" opacity=".5" />
+                  <circle cx="230" cy="172" r="3.5" fill="var(--teal)"><animateTransform attributeName="transform" type="rotate" from="0 230 206" to="360 230 206" dur="9s" repeatCount="indefinite" /></circle>
+                  <circle cx="260" cy="206" r="3" fill="var(--gold)"><animateTransform attributeName="transform" type="rotate" from="120 230 206" to="480 230 206" dur="9s" repeatCount="indefinite" /></circle>
                 </g>
-                <text x="230" y="206" textAnchor="middle" fontFamily="var(--font-display)" fontSize="15" fill="#fff" fontWeight="700">CAITO360</text>
-                <text x="230" y="222" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="9" fill="var(--gold)" letterSpacing="1.5">ACADEMY</text>
-                {/* Outcomes: Skilled / Deployed / Earning */}
-                <circle cx="400" cy="118" r="26" fill="url(#core)" stroke="var(--teal)" strokeWidth="1.5" />
-                <path d="M400 105l3 6 6.5.9-4.7 4.6 1.1 6.5-5.9-3.1-5.9 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="var(--teal)" />
-                <text x="400" y="162" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="#fff">Skilled</text>
-                <circle cx="400" cy="210" r="26" fill="url(#core)" stroke="var(--cyan)" strokeWidth="1.5" />
-                <path d="M389 210l7 7 13-14" stroke="var(--cyan)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-                <text x="400" y="254" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="#fff">Deployed</text>
-                <circle cx="400" cy="304" r="26" fill="url(#core)" stroke="var(--gold)" strokeWidth="1.5" />
-                <text x="400" y="312" textAnchor="middle" fontFamily="var(--font-display)" fontSize="22" fill="var(--gold)" fontWeight="700">$</text>
-                <text x="400" y="348" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="#fff">Earning</text>
+                <text x="230" y="202" textAnchor="middle" fontFamily="var(--font-display)" fontSize="15" fill="#fff" fontWeight="700">CAITO360</text>
+                <text x="230" y="218" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="9" fill="var(--gold)" letterSpacing="1.5">ACADEMY</text>
+                <text x="230" y="272" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="11" fill="var(--teal)" letterSpacing="1">LEARN · MASTER AI</text>
+
+                {/* 3 — EARN (outcome) */}
+                <circle cx="394" cy="96" r="34" fill="url(#earn)" stroke="rgb(133,187,101)" strokeWidth="1.8" />
+                <text x="394" y="105" textAnchor="middle" fontFamily="var(--font-display)" fontSize="26" fill="rgb(133,187,101)" fontWeight="700">$</text>
+                <text x="394" y="150" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="12" fill="#fff" fontWeight="700">EARN</text>
               </svg>
             </div>
-            <div className="hero-stages"><span><b>01</b> LEARN</span><span><b>02</b> BUILD</span><span><b>03</b> EARN</span></div>
           </div>
         </div>
       </section>
