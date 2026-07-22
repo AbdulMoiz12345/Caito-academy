@@ -4,28 +4,43 @@ import { useEffect, useRef, useState } from "react";
 
 const PHOTOS = [
   { src: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=70&auto=format&fit=crop", cap: "Collaborate", alt: "Team collaborating on AI projects" },
-  { src: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600&q=70&auto=format&fit=crop", cap: "Build", alt: "Hands-on coding session" },
+  { src: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600&q=70&auto=format&fit=crop", cap: "Build", alt: "Hands-on automation session" },
   { src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=70&auto=format&fit=crop", cap: "Get mentored", alt: "Mentorship and teamwork" },
   { src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=70&auto=format&fit=crop", cap: "Strategize", alt: "Strategy whiteboarding" },
-  { src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=70&auto=format&fit=crop", cap: "Deploy", alt: "Deployed AI practitioner at work" },
+  { src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=70&auto=format&fit=crop", cap: "Deliver", alt: "Deployed AI practitioner at work" },
 ];
 
+// Curriculum-aligned skills (from the AI Automation program)
 const SKILLS = [
-  { t: "AI Automation", d: "M6 12h4l2-5 4 10 2-5h4", },
-  { t: "Prompt Engineering", d: "M4 7l5 5-5 5M12 17h8" },
-  { t: "AI Agents", d: "M12 4a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V8a4 4 0 0 1 4-4zM6 20a6 6 0 0 1 12 0" },
-  { t: "Workflow Design", d: "M5 6h6v4H5zM13 14h6v4h-6zM8 10v4h5" },
-  { t: "Data & Documents", d: "M7 4h7l4 4v12H7zM14 4v4h4" },
-  { t: "Tool Integration", d: "M9 7a3 3 0 1 0 0 6M15 17a3 3 0 1 0 0-6M9 10h6" },
-  { t: "Dashboards", d: "M4 20V10M10 20V4M16 20v-7M22 20H2" },
-  { t: "Responsible AI", d: "M12 3l7 3v5c0 4-3 7-7 8-4-1-7-4-7-8V6z" },
+  { t: "AI Workflow Automation", d: "M5 6h4v4H5zM15 14h4v4h-4zM9 8h4a2 2 0 0 1 2 2v6" },
+  { t: "No-Code Building", d: "M4 5h6v6H4zM14 5h6v6h-6zM4 15h6v6H4zM14 15h6v6h-6z" },
+  { t: "Business Process Automation", d: "M20 12a8 8 0 0 1-14 5M4 12a8 8 0 0 1 14-5M18 4v3h-3M6 20v-3h3" },
+  { t: "AI Agents & Assistants", d: "M7 4h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4V6a2 2 0 0 1 2-2zM9 10h.01M15 10h.01" },
+  { t: "LLMs & Prompting", d: "M4 5h16v10H9l-5 4V5zM8 10h8M8 13h5" },
+  { t: "APIs & Integrations", d: "M9 7a3 3 0 1 0 0 6M15 17a3 3 0 1 0 0-6M9 10h6" },
+  { t: "Client Project Delivery", d: "M3 8l9-5 9 5v8l-9 5-9-5zM3 8l9 5 9-5v8" },
+  { t: "AI Demos & Portfolio", d: "M4 5h16v11H4zM9 20h6M12 16v4" },
+];
+
+// Tools taught (from the program's technology stack)
+const TOOLS = [
+  { n: "n8n", m: "n8", p: "Workflow automation", c: "var(--teal)", core: true },
+  { n: "OpenAI", m: "AI", p: "GPT models", c: "var(--cyan)", core: true },
+  { n: "Claude", m: "C", p: "AI reasoning", c: "var(--gold)", core: true },
+  { n: "Make.com", m: "M", p: "Visual automations", c: "var(--blue)" },
+  { n: "Zapier", m: "Z", p: "App integrations", c: "var(--gold)" },
+  { n: "GoHighLevel", m: "G", p: "CRM & funnels", c: "var(--cyan)", core: true },
+  { n: "Twilio", m: "T", p: "SMS & voice", c: "var(--teal)" },
+  { n: "Google Workspace", m: "GW", p: "Sheets, Gmail, Docs", c: "var(--blue)" },
+  { n: "Webhooks / REST", m: "{}", p: "Connect anything", c: "var(--teal)", core: true },
+  { n: "Airtable / Notion", m: "A", p: "Databases", c: "var(--cyan)" },
 ];
 
 const FAQS = [
   { q: "Is it really free?", a: "Yes — the 2-month training costs trainees nothing. You invest your time; we invest the training." },
-  { q: "Do I need coding experience?", a: "No. The program is built for beginners in AI. We take you from the fundamentals to practitioner level." },
+  { q: "Do I need coding experience?", a: "No. The program is built for beginners and focuses on modern no-code and low-code AI tools." },
   { q: "How much time does it take?", a: "It's an intensive 2-month program. Expect focused, hands-on work with expert guidance throughout." },
-  { q: "How do I actually earn?", a: "After you certify, you join Caito360's global workforce and earn through a profit-share model on real AI projects." },
+  { q: "How do I actually earn?", a: "Once you're trained, you join Caito360's global workforce and earn through a profit-share model on real AI projects." },
   { q: "What happens after I apply?", a: "We review your application and email you the next steps for screening. Selected applicants start training." },
 ];
 
@@ -125,8 +140,8 @@ export default function Home() {
             <div className="nav-links">
               <a href="#program" onClick={scrollTo("program")}>Program</a>
               <a href="#learn" onClick={scrollTo("learn")}>Learn</a>
+              <a href="#tools" onClick={scrollTo("tools")}>Tools</a>
               <a href="#earn" onClick={scrollTo("earn")}>Earn</a>
-              <a href="#faq" onClick={scrollTo("faq")}>FAQ</a>
               <a href="#apply" onClick={scrollTo("apply")}>Apply</a>
             </div>
             <div className="nav-cta">
@@ -145,6 +160,7 @@ export default function Home() {
           <div className="wrap">
             <a href="#program" onClick={scrollTo("program")}>Program</a>
             <a href="#learn" onClick={scrollTo("learn")}>Learn</a>
+            <a href="#tools" onClick={scrollTo("tools")}>Tools</a>
             <a href="#earn" onClick={scrollTo("earn")}>Earn</a>
             <a href="#faq" onClick={scrollTo("faq")}>FAQ</a>
             <a href="#apply" onClick={scrollTo("apply")}>Apply</a>
@@ -159,87 +175,79 @@ export default function Home() {
         <div className="glow a" /><div className="glow b" />
         <div className="wrap hero-grid">
           <div>
+            <div className="live-badge reveal"><span className="pulse-dot" /> Applications open now</div>
             <div className="badges reveal">
-              <span className="chip"><b>100% Free</b> Training</span>
-              <span className="chip"><b>2 Months</b> Intensive</span>
-              <span className="chip"><b>Global</b> AI Career</span>
+              <span className="chip">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 12l-8 8-8-8V4h8z" stroke="var(--teal)" strokeWidth="2" strokeLinejoin="round" /><circle cx="8" cy="8" r="1.4" fill="var(--teal)" /></svg>
+                <b>100% Free</b> Training
+              </span>
+              <span className="chip">
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--cyan)" strokeWidth="2" /><path d="M12 7v5l3 2" stroke="var(--cyan)" strokeWidth="2" strokeLinecap="round" /></svg>
+                <b>2 Months</b> Intensive
+              </span>
+              <span className="chip">
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--gold)" strokeWidth="2" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" stroke="var(--gold)" strokeWidth="1.6" /></svg>
+                <b>Earn</b> Globally
+              </span>
             </div>
             <h1 className="reveal">
               <span className="l">Learn.</span><br /><span className="e">Earn.</span><br /><span className="n">Now.</span>
             </h1>
             <p className="lead reveal">
-              Go from AI beginner to certified <b style={{ color: "var(--text)" }}>AI Automation Practitioner</b> in two months — then join our global consulting workforce.
+              Go from AI beginner to working <b style={{ color: "var(--text)" }}>AI Automation Practitioner</b> in two months — then start earning on real projects with our global workforce.
             </p>
             <div className="hero-actions reveal">
               <a href="#apply" onClick={scrollTo("apply")} className="btn btn-primary">Start Your Application →</a>
-              <a href="#program" onClick={scrollTo("program")} className="btn btn-ghost">See the Program</a>
+              <a href="#learn" onClick={scrollTo("learn")} className="btn btn-ghost">See What You&apos;ll Learn</a>
             </div>
           </div>
           <div className="reveal">
             <div className="hero-visual">
-              <svg viewBox="0 0 460 470" width="100%" height="100%" fill="none" aria-label="Your journey: beginner to certified, deployed and earning AI practitioner">
+              <svg viewBox="0 0 460 470" width="100%" height="100%" fill="none" aria-label="Your journey: beginner to skilled, deployed and earning AI practitioner">
                 <defs>
                   <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop stopColor="#2FE0C6" /><stop offset="1" stopColor="#4C7DFF" /></linearGradient>
                   <radialGradient id="core"><stop stopColor="#123056" /><stop offset="1" stopColor="#0C1730" /></radialGradient>
                   <radialGradient id="you"><stop stopColor="#0f2a3f" /><stop offset="1" stopColor="#0C1730" /></radialGradient>
                 </defs>
-
-                {/* connecting paths: YOU -> ACADEMY -> outcomes */}
                 <g stroke="url(#line)" strokeWidth="1.8" opacity=".5">
                   <path d="M95 210 L215 210" />
                   <path d="M250 190 C320 150 340 130 388 118" fill="none" />
                   <path d="M255 210 L360 210" />
                   <path d="M250 232 C320 272 340 292 388 304" fill="none" />
                 </g>
-
-                {/* travelling pulses along the journey */}
                 <g>
                   <circle r="4" fill="var(--teal)"><animateMotion dur="2.8s" repeatCount="indefinite" path="M95 210 L215 210 M250 190 C320 150 340 130 388 118" /></circle>
                   <circle r="4" fill="var(--gold)"><animateMotion dur="3.2s" repeatCount="indefinite" path="M95 210 L215 210 M255 210 L360 210" /></circle>
                   <circle r="4" fill="var(--cyan)"><animateMotion dur="3.6s" repeatCount="indefinite" path="M95 210 L215 210 M250 232 C320 272 340 292 388 304" /></circle>
                 </g>
-
-                {/* YOU (beginner) */}
+                {/* YOU */}
                 <circle cx="70" cy="210" r="34" fill="url(#you)" stroke="var(--cyan)" strokeWidth="1.6" />
-                <g stroke="var(--cyan)" strokeWidth="2" fill="none">
-                  <circle cx="70" cy="200" r="7" />
-                  <path d="M56 224c0-8 6-12 14-12s14 4 14 12" strokeLinecap="round" />
-                </g>
+                <g stroke="var(--cyan)" strokeWidth="2" fill="none"><circle cx="70" cy="200" r="7" /><path d="M56 224c0-8 6-12 14-12s14 4 14 12" strokeLinecap="round" /></g>
                 <text x="70" y="266" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="12" fill="#fff" fontWeight="700">YOU</text>
                 <text x="70" y="282" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="9.5" fill="var(--muted)">beginner</text>
-
-                {/* CAITO360 ACADEMY core */}
-                <circle cx="230" cy="210" r="46" fill="url(#core)" stroke="var(--gold)" strokeWidth="2">
-                  <animate attributeName="r" values="46;49;46" dur="3s" repeatCount="indefinite" />
-                </circle>
+                {/* ACADEMY */}
+                <circle cx="230" cy="210" r="46" fill="url(#core)" stroke="var(--gold)" strokeWidth="2"><animate attributeName="r" values="46;49;46" dur="3s" repeatCount="indefinite" /></circle>
                 <g opacity=".9">
                   <circle cx="230" cy="210" r="30" stroke="var(--teal)" strokeWidth="1" fill="none" opacity=".5" />
-                  {/* orbiting skill dots */}
                   <circle cx="230" cy="176" r="3.5" fill="var(--teal)"><animateTransform attributeName="transform" type="rotate" from="0 230 210" to="360 230 210" dur="9s" repeatCount="indefinite" /></circle>
                   <circle cx="260" cy="210" r="3" fill="var(--cyan)"><animateTransform attributeName="transform" type="rotate" from="120 230 210" to="480 230 210" dur="9s" repeatCount="indefinite" /></circle>
                   <circle cx="205" cy="230" r="3" fill="var(--gold)"><animateTransform attributeName="transform" type="rotate" from="240 230 210" to="600 230 210" dur="9s" repeatCount="indefinite" /></circle>
                 </g>
                 <text x="230" y="206" textAnchor="middle" fontFamily="var(--font-display)" fontSize="15" fill="#fff" fontWeight="700">CAITO360</text>
                 <text x="230" y="222" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="9" fill="var(--gold)" letterSpacing="1.5">ACADEMY</text>
-
-                {/* Outcomes */}
-                {/* Certified (star) */}
+                {/* Outcomes: Skilled / Deployed / Earning */}
                 <circle cx="400" cy="118" r="26" fill="url(#core)" stroke="var(--teal)" strokeWidth="1.5" />
                 <path d="M400 105l3 6 6.5.9-4.7 4.6 1.1 6.5-5.9-3.1-5.9 3.1 1.1-6.5-4.7-4.6 6.5-.9z" fill="var(--teal)" />
-                <text x="400" y="162" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="#fff">Certified</text>
-                {/* Deployed (check) */}
+                <text x="400" y="162" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="#fff">Skilled</text>
                 <circle cx="400" cy="210" r="26" fill="url(#core)" stroke="var(--cyan)" strokeWidth="1.5" />
                 <path d="M389 210l7 7 13-14" stroke="var(--cyan)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
                 <text x="400" y="254" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="#fff">Deployed</text>
-                {/* Earning ($) */}
                 <circle cx="400" cy="304" r="26" fill="url(#core)" stroke="var(--gold)" strokeWidth="1.5" />
                 <text x="400" y="312" textAnchor="middle" fontFamily="var(--font-display)" fontSize="22" fill="var(--gold)" fontWeight="700">$</text>
                 <text x="400" y="348" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="#fff">Earning</text>
               </svg>
             </div>
-            <div className="hero-stages">
-              <span><b>01</b> LEARN</span><span><b>02</b> BUILD</span><span><b>03</b> EARN</span>
-            </div>
+            <div className="hero-stages"><span><b>01</b> LEARN</span><span><b>02</b> BUILD</span><span><b>03</b> EARN</span></div>
           </div>
         </div>
       </section>
@@ -249,7 +257,7 @@ export default function Home() {
         <div className="wrap">
           <div className="stats-grid reveal">
             <Stat to={2} label="Months intensive" />
-            <Stat to={8} suffix="+" label="Core AI skills" />
+            <Stat to={10} suffix="+" label="Tools & skills" />
             <Stat to={100} suffix="%" label="Hands-on" />
             <Stat to={0} prefix="$" label="Cost to you" gold />
           </div>
@@ -262,7 +270,7 @@ export default function Home() {
           <div className="band-head reveal">
             <span className="eyebrow">The Program</span>
             <h2>A career in AI, at a glance</h2>
-            <p>No jargon. No cost. Just a fast, structured path from beginner to deployed practitioner.</p>
+            <p>No jargon. No cost. A fast, hands-on path from beginner to earning practitioner.</p>
           </div>
           <div className="glance-grid">
             <div className="gcard reveal">
@@ -278,7 +286,7 @@ export default function Home() {
               <div className="big free">$0</div><div className="lbl">Cost to trainees</div>
             </div>
             <div className="gcard reveal">
-              <svg className="ico" viewBox="0 0 48 48" fill="none"><path d="M8 40V26M18 40V16M28 40V22M38 40V10" stroke="var(--gold)" strokeWidth="2.6" strokeLinecap="round" /><path d="M8 12l10 4 8-6 12 4" stroke="var(--gold)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" opacity=".6" /></svg>
+              <svg className="ico" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="var(--gold)" strokeWidth="2.5" /><path d="M24 13v22M18.5 18a5 4 0 0 1 11 0c0 5-11 3-11 8a5 4 0 0 0 11 0" stroke="var(--gold)" strokeWidth="2.4" strokeLinecap="round" /></svg>
               <div className="big cost">Profit<br />Share</div><div className="lbl">Earn on real projects</div>
             </div>
           </div>
@@ -290,8 +298,8 @@ export default function Home() {
         <div className="wrap">
           <div className="band-head reveal">
             <span className="eyebrow">Learn</span>
-            <h2>Skills you&apos;ll master</h2>
-            <p>Practical, in-demand AI automation skills — taught by doing.</p>
+            <h2>What you&apos;ll learn</h2>
+            <p>Practical AI automation skills that businesses pay for — taught by doing.</p>
           </div>
           <div className="skills-grid">
             {SKILLS.map((s) => (
@@ -307,15 +315,68 @@ export default function Home() {
               <div className="tag">Month 1</div>
               <h3>Foundations</h3>
               <div className="pills">
-                <span>AI fundamentals</span><span>Prompting</span><span>Automation basics</span><span>Tools &amp; setup</span><span>First builds</span>
+                <span>AI &amp; LLM basics</span><span>Prompting</span><span>No-code tools</span><span>Workflow logic</span><span>First automations</span>
               </div>
             </div>
             <div className="phase two reveal">
               <div className="tag">Month 2</div>
               <h3>Real projects</h3>
               <div className="pills">
-                <span>Live project work</span><span>Agents &amp; workflows</span><span>Best practices</span><span>Delivery</span><span>Certification</span>
+                <span>AI agents</span><span>Multi-step workflows</span><span>API integrations</span><span>Live client work</span><span>Demos &amp; portfolio</span>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ TOOLS ============ */}
+      <section className="band glance" id="tools">
+        <div className="wrap">
+          <div className="band-head reveal">
+            <span className="eyebrow">Toolstack</span>
+            <h2>Tools you&apos;ll master</h2>
+            <p>The modern no-code and AI stack used to deliver real automation projects.</p>
+          </div>
+          <div className="tools-grid">
+            {TOOLS.map((t) => (
+              <div className="tool reveal" key={t.n}>
+                <span className="tbadge" style={{ background: t.c }}>{t.m}</span>
+                <div><b>{t.n}</b><span className="p">{t.p}</span></div>
+                {t.core && <span className="core-tag">CORE</span>}
+              </div>
+            ))}
+          </div>
+
+          <div className="pipeline-cap"><b>What you&apos;ll build</b> — a real client automation</div>
+          <div className="pipeline reveal">
+            <div className="pnode">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="var(--cyan)" strokeWidth="2" /><path d="M8 9h8M8 13h5" stroke="var(--cyan)" strokeWidth="2" strokeLinecap="round" /></svg>
+              <span>Lead form</span>
+            </div>
+            <div className="parrow">→</div>
+            <div className="pnode">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="var(--gold)" strokeWidth="2" /><circle cx="8" cy="12" r="2" stroke="var(--gold)" strokeWidth="2" /><path d="M13 11h5M13 14h3" stroke="var(--gold)" strokeWidth="2" strokeLinecap="round" /></svg>
+              <span>CRM</span><small>GoHighLevel</small>
+            </div>
+            <div className="parrow">→</div>
+            <div className="pnode">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2.5" stroke="var(--teal)" strokeWidth="2" /><circle cx="18" cy="18" r="2.5" stroke="var(--teal)" strokeWidth="2" /><circle cx="18" cy="6" r="2.5" stroke="var(--teal)" strokeWidth="2" /><path d="M8 6h7M6 8v6a4 4 0 0 0 4 4h6" stroke="var(--teal)" strokeWidth="2" /></svg>
+              <span>Automate</span><small>n8n</small>
+            </div>
+            <div className="parrow">→</div>
+            <div className="pnode">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z" stroke="var(--gold)" strokeWidth="2" strokeLinejoin="round" /></svg>
+              <span>AI reply</span><small>GPT + Claude</small>
+            </div>
+            <div className="parrow">→</div>
+            <div className="pnode">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4zM4 7l8 6 8-6" stroke="var(--cyan)" strokeWidth="2" strokeLinejoin="round" /></svg>
+              <span>SMS + Email</span><small>Twilio</small>
+            </div>
+            <div className="parrow">→</div>
+            <div className="pnode">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="2" stroke="var(--teal)" strokeWidth="2" /><path d="M4 9h16M8 3v4M16 3v4M9 14l2 2 4-4" stroke="var(--teal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <span>Book &amp; update</span>
             </div>
           </div>
         </div>
@@ -353,8 +414,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ EARN: PROFIT SHARE ============ */}
-      <section className="band glance" id="earn">
+      {/* ============ EARN ============ */}
+      <section className="band why" id="earn">
         <div className="wrap">
           <div className="band-head reveal">
             <span className="eyebrow">Earn</span>
@@ -373,7 +434,7 @@ export default function Home() {
             </div>
             <div className="earrow">→</div>
             <div className="estep reveal">
-              <div className="ring"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--gold)" strokeWidth="2" /><path d="M12 7v10M9.5 9.5a2.5 2 0 0 1 5 0c0 2.5-5 1.5-5 4a2.5 2 0 0 0 5 0" stroke="var(--gold)" strokeWidth="1.8" strokeLinecap="round" /></svg></div>
+              <div className="ring"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--gold)" strokeWidth="2" /><path d="M12 6v12M9 9.2a4 3 0 0 1 6 0c0 3.5-6 2-6 5a4 3 0 0 0 6 0" stroke="var(--gold)" strokeWidth="1.9" strokeLinecap="round" /></svg></div>
               <h3>Share the profit</h3><p>Earn as you deliver.</p>
             </div>
           </div>
@@ -390,15 +451,15 @@ export default function Home() {
           <div className="why-grid">
             <div className="wcard reveal">
               <svg className="ico" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="15" r="7" stroke="var(--teal)" strokeWidth="2.4" /><path d="M9 36c0-7 6-11 13-11s13 4 13 11" stroke="var(--teal)" strokeWidth="2.4" strokeLinecap="round" /></svg>
-              <h3>Led by SMEs</h3><p>Trained by subject-matter experts, overseen by industry veterans.</p>
+              <h3>Led by experts</h3><p>Trained by subject-matter experts, overseen by industry veterans.</p>
             </div>
             <div className="wcard reveal">
               <svg className="ico" viewBox="0 0 44 44" fill="none"><rect x="7" y="9" width="30" height="26" rx="3" stroke="var(--cyan)" strokeWidth="2.4" /><path d="M13 22l4 4 8-8" stroke="var(--cyan)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
               <h3>Real projects</h3><p>Learn by delivering actual work on the Caito360 platform.</p>
             </div>
             <div className="wcard reveal">
-              <svg className="ico" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="18" r="10" stroke="var(--gold)" strokeWidth="2.4" /><path d="M16 27l-3 10 9-5 9 5-3-10" stroke="var(--gold)" strokeWidth="2.4" strokeLinejoin="round" /></svg>
-              <h3>Caito Certification</h3><p>Finish certified and ready for the global consulting workforce.</p>
+              <svg className="ico" viewBox="0 0 44 44" fill="none"><circle cx="16" cy="16" r="6" stroke="var(--gold)" strokeWidth="2.4" /><circle cx="30" cy="26" r="6" stroke="var(--gold)" strokeWidth="2.4" /><path d="M8 38c0-5 4-8 8-8M22 12c5 0 8 3 8 8" stroke="var(--gold)" strokeWidth="2.4" strokeLinecap="round" /></svg>
+              <h3>Global workforce</h3><p>Join Caito360&apos;s consulting team on live projects worldwide.</p>
             </div>
           </div>
 
@@ -415,13 +476,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ OUTCOME ============ */}
+      {/* ============ OUTCOME (earning-focused) ============ */}
       <section className="band outcome">
         <div className="wrap">
-          <h2 className="reveal">Complete the program.<br />Certify. Join the workforce.</h2>
+          <h2 className="reveal">Get trained. Get deployed.<br />Get paid.</h2>
           <div className="cert reveal">
-            <svg viewBox="0 0 46 46" fill="none"><circle cx="23" cy="19" r="13" stroke="var(--gold)" strokeWidth="2.6" /><path d="M23 13l2 4.2 4.6.6-3.4 3.2.8 4.6L23 23.4 18 25.6l.8-4.6L15.4 18l4.6-.6z" fill="var(--gold)" /><path d="M16 30l-2 12 9-4 9 4-2-12" stroke="var(--gold)" strokeWidth="2.6" strokeLinejoin="round" /></svg>
-            <div><b>Caito Certification</b><span>Your entry to global AI consulting</span></div>
+            <svg viewBox="0 0 46 46" fill="none"><circle cx="23" cy="23" r="18" stroke="var(--gold)" strokeWidth="2.6" /><path d="M23 12v22M17 17.5a6 4.5 0 0 1 12 0c0 6-12 3.5-12 9a6 4.5 0 0 0 12 0" stroke="var(--gold)" strokeWidth="2.4" strokeLinecap="round" /></svg>
+            <div><b>Profit-share income</b><span>Earn on real AI projects worldwide</span></div>
           </div>
         </div>
       </section>
