@@ -205,9 +205,9 @@ export default function Home() {
 
                 {/* sequential connecting path (single line, one direction) */}
                 <path d="M92 292 L196 224 M264 188 L368 120" stroke="url(#lg)" strokeWidth="2.6" strokeLinecap="round" />
-                {/* direction chevrons */}
-                <path d="M150 262l7-4-1 8" stroke="var(--gold)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                <path d="M322 152l7-4-1 8" stroke="rgb(133,187,101)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                {/* direction chevrons — centred on each segment, aligned to the slope */}
+                <path d="M-5 -5 L0 0 L-5 5" fill="none" stroke="var(--gold)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" transform="translate(144 258) rotate(-33.2)" />
+                <path d="M-5 -5 L0 0 L-5 5" fill="none" stroke="rgb(133,187,101)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" transform="translate(316 154) rotate(-33.2)" />
                 {/* single pulse travelling the whole sequence */}
                 <circle r="4.5" fill="var(--gold)">
                   <animateMotion dur="3.4s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" path="M92 292 L200 222 L264 188 L368 120" />
