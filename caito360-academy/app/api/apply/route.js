@@ -5,7 +5,7 @@ const CLIENT_ID = process.env.MS_CLIENT_ID;
 const CLIENT_SECRET = process.env.MS_CLIENT_SECRET;
 // Mailbox the message is SENT FROM (must be a real mailbox in your tenant),
 // e.g. no-reply@caito360.ai or salman.ansari@caito360.ai
-const SENDER = process.env.MS_SENDER || "salman.ansari@caito360.ai";
+const SENDER = process.env.MS_SENDER || "no-reply@caito360.ai";
 // Where applications are delivered
 const TO = process.env.TO_EMAIL || "salman.ansari@caito360.ai";
 
