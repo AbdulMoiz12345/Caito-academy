@@ -73,17 +73,29 @@ nav{display:flex;align-items:center;justify-content:space-between;height:70px}
 .chip{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.05em;padding:7px 14px;border-radius:999px;
   border:1px solid var(--line);color:var(--muted);background:rgba(255,255,255,.02)}
 .chip b{color:var(--teal);font-weight:700}
-.hero h1{font-size:clamp(56px,9vw,104px);line-height:.92}
-.hero h1 .l{color:var(--teal)}
-.hero h1 .e{color:var(--gold)}
-.hero h1 .n{display:inline-block;position:relative;font-size:1.08em;
-  background:linear-gradient(100deg,#fff 8%,var(--cyan) 45%,var(--teal) 82%);background-size:220% auto;
-  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 5s linear infinite}
-@keyframes shimmer{to{background-position:220% center}}
-.hero h1 .n:after{content:"";position:absolute;left:0;bottom:.03em;height:6px;width:100%;border-radius:5px;
-  background:linear-gradient(90deg,var(--teal),var(--gold));transform:scaleX(1);transform-origin:left;
-  animation:drawline 1s .7s cubic-bezier(.2,.7,.2,1) both}
-@keyframes drawline{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero h1{font-size:clamp(46px,8vw,82px);line-height:1.0}
+.hero h1 .line1{display:block;white-space:nowrap}
+.hero h1 .l{color:rgb(37,99,235)}   /* Learn — royal blue: knowledge, trust */
+.hero h1 .e{color:rgb(133,187,101)} /* Earn — money green: wealth, growth */
+.hero h1 .n{display:block;position:relative;color:rgb(249,115,22); /* Now — orange: action, urgency */
+  font-style:italic;transform:skewX(-8deg);transform-origin:left bottom;font-size:1.14em;
+  padding-left:.02em;margin-top:.04em;width:max-content;
+  filter:drop-shadow(0 6px 20px rgba(249,115,22,.35));
+  animation:revup 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes revup{from{opacity:0;transform:skewX(-8deg) translateX(-40px)}to{opacity:1;transform:skewX(-8deg) translateX(0)}}
+/* speed streaks for the acceleration theme */
+.hero h1 .n .speed{position:absolute;top:50%;right:100%;transform:translateY(-50%);
+  width:58px;height:34px;margin-right:14px;pointer-events:none;
+  background-image:linear-gradient(rgb(249,115,22),rgb(249,115,22)),
+    linear-gradient(rgba(249,115,22,.6),rgba(249,115,22,.6)),
+    linear-gradient(rgba(249,115,22,.32),rgba(249,115,22,.32));
+  background-repeat:no-repeat;
+  background-size:100% 5px,74% 5px,50% 5px;
+  background-position:right 5px,right 50%,right calc(100% - 5px);
+  border-radius:6px;animation:whoosh 2.2s ease-in-out infinite}
+@keyframes whoosh{0%,100%{opacity:.4;transform:translateY(-50%) translateX(0)}
+  50%{opacity:1;transform:translateY(-50%) translateX(-9px)}}
+@media(max-width:560px){.hero h1 .n .speed{display:none}}
 .hero p.lead{font-size:19px;color:var(--muted);max-width:440px;margin:24px 0 34px}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
 .hero-visual{position:relative;height:460px}

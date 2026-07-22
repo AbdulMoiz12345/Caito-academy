@@ -64,7 +64,7 @@ function Stat({ to, prefix = "", suffix = "", label, gold }) {
           io.unobserve(el);
         }
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.25, rootMargin: "0px 0px -10% 0px" });
     io.observe(el);
     return () => io.disconnect();
   }, [to]);
@@ -175,26 +175,12 @@ export default function Home() {
         <div className="glow a" /><div className="glow b" />
         <div className="wrap hero-grid">
           <div>
-            <div className="live-badge reveal"><span className="pulse-dot" /> Applications open now</div>
-            <div className="badges reveal">
-              <span className="chip">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M20 12l-8 8-8-8V4h8z" stroke="var(--teal)" strokeWidth="2" strokeLinejoin="round" /><circle cx="8" cy="8" r="1.4" fill="var(--teal)" /></svg>
-                <b>100% Free</b> Training
-              </span>
-              <span className="chip">
-                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--cyan)" strokeWidth="2" /><path d="M12 7v5l3 2" stroke="var(--cyan)" strokeWidth="2" strokeLinecap="round" /></svg>
-                <b>2 Months</b> Intensive
-              </span>
-              <span className="chip">
-                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--gold)" strokeWidth="2" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" stroke="var(--gold)" strokeWidth="1.6" /></svg>
-                <b>Earn</b> Globally
-              </span>
-            </div>
             <h1 className="reveal">
-              <span className="l">Learn.</span><br /><span className="e">Earn.</span><br /><span className="n">Now.</span>
+              <span className="line1"><span className="l">Learn.</span> <span className="e">Earn.</span></span>
+              <span className="n">Now.<i className="speed" aria-hidden="true" /></span>
             </h1>
             <p className="lead reveal">
-              Go from AI beginner to working <b style={{ color: "var(--text)" }}>AI Automation Practitioner</b> in two months — then start earning on real projects with our global workforce.
+              Master AI Automation. Start earning on real projects.
             </p>
             <div className="hero-actions reveal">
               <a href="#apply" onClick={scrollTo("apply")} className="btn btn-primary">Start Your Application →</a>
