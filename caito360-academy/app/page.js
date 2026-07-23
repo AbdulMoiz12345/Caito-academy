@@ -180,8 +180,8 @@ export default function Home() {
               <span className="n">NOW.</span>
             </h1>
             <p className="lead reveal">
-              <b className="hl-blue">Master</b> AI Automation. Start <b className="hl-green">Earning</b>
-              <svg className="dollar-ico" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="rgb(133,187,101)" strokeWidth="2" /><path d="M12 6v12M9.2 9a3 2.4 0 0 1 5.6 0c0 3-5.6 1.8-5.6 4.5a3 2.4 0 0 0 5.6 0" stroke="rgb(133,187,101)" strokeWidth="1.8" strokeLinecap="round" /></svg>
+              <span className="hl-blue">Master AI Automation.</span>{" "}
+              <span className="hl-green">Start <span className="nb">Earning <span className="dollar">$</span></span></span>
             </p>
             <div className="hero-actions reveal">
               <a href="#apply" onClick={scrollTo("apply")} className="btn btn-primary">Start Your Application →</a>

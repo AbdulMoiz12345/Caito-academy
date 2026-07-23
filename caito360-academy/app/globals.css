@@ -73,7 +73,7 @@ nav{display:flex;align-items:center;justify-content:space-between;height:70px}
 .chip{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.05em;padding:7px 14px;border-radius:999px;
   border:1px solid var(--line);color:var(--muted);background:rgba(255,255,255,.02)}
 .chip b{color:var(--teal);font-weight:700}
-.hero h1{font-size:clamp(46px,8vw,82px);line-height:1.0}
+.hero h1{font-size:clamp(42px,8vw,82px);line-height:1.0}
 .hero h1 .line1{display:block;white-space:nowrap}
 .hero h1 .l{color:rgb(37,99,235)}   /* Learn — royal blue: knowledge, trust */
 .hero h1 .e{color:rgb(133,187,101)} /* Earn — money green: wealth, growth */
@@ -86,11 +86,19 @@ nav{display:flex;align-items:center;justify-content:space-between;height:70px}
 /* hero lead highlights */
 .hero p.lead .hl-blue{color:rgb(37,99,235);font-weight:600}
 .hero p.lead .hl-green{color:rgb(133,187,101);font-weight:600}
-.hero p.lead .dollar-ico{width:20px;height:20px;vertical-align:-4px;margin-left:5px}
+.hero p.lead .nb{white-space:nowrap}
+.hero p.lead .dollar{color:rgb(133,187,101);font-weight:700;font-family:var(--font-display);font-size:1.1em;margin-left:2px}
 .hero p.lead{font-size:19px;color:var(--muted);max-width:440px;margin:24px 0 34px}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
 .hero-visual{position:relative;height:460px}
-@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:34px}.hero-visual{height:340px;order:-1}}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero-visual{height:340px;order:-1}
+  .hero-grid>div:first-child{text-align:center}
+  .hero h1 .n{margin-left:auto;margin-right:auto;transform-origin:center bottom}
+  .hero p.lead{margin-left:auto;margin-right:auto}
+  .hero-actions{justify-content:center}
+}
 
 .glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;z-index:-1}
 .glow.a{width:420px;height:420px;background:radial-gradient(circle,var(--blue),transparent 70%);top:-120px;right:-80px}
