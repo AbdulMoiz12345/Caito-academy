@@ -276,7 +276,7 @@ export default function Home() {
               <div className="big free">$0</div><div className="lbl">Cost to trainees</div>
             </div>
             <div className="gcard reveal">
-              <svg className="ico" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="var(--gold)" strokeWidth="2.5" /><path d="M24 13v22M18.5 18a5 4 0 0 1 11 0c0 5-11 3-11 8a5 4 0 0 0 11 0" stroke="var(--gold)" strokeWidth="2.4" strokeLinecap="round" /></svg>
+              <svg className="ico" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="var(--gold)" strokeWidth="2.5" /><text x="24" y="32" textAnchor="middle" fontFamily="var(--font-display)" fontSize="23" fontWeight="700" fill="var(--gold)">$</text></svg>
               <div className="big cost">Profit<br />Share</div><div className="lbl">Earn on real projects</div>
             </div>
           </div>
@@ -424,7 +424,7 @@ export default function Home() {
             </div>
             <div className="earrow">→</div>
             <div className="estep reveal">
-              <div className="ring"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--gold)" strokeWidth="2" /><path d="M12 6v12M9 9.2a4 3 0 0 1 6 0c0 3.5-6 2-6 5a4 3 0 0 0 6 0" stroke="var(--gold)" strokeWidth="1.9" strokeLinecap="round" /></svg></div>
+              <div className="ring"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--gold)" strokeWidth="2" /><text x="12" y="16.5" textAnchor="middle" fontFamily="var(--font-display)" fontSize="13" fontWeight="700" fill="var(--gold)">$</text></svg></div>
               <h3>Share the profit</h3><p>Earn as you deliver.</p>
             </div>
           </div>
@@ -471,7 +471,7 @@ export default function Home() {
         <div className="wrap">
           <h2 className="reveal">Get trained. Get deployed.<br />Get paid.</h2>
           <div className="cert reveal">
-            <svg viewBox="0 0 46 46" fill="none"><circle cx="23" cy="23" r="18" stroke="var(--gold)" strokeWidth="2.6" /><path d="M23 12v22M17 17.5a6 4.5 0 0 1 12 0c0 6-12 3.5-12 9a6 4.5 0 0 0 12 0" stroke="var(--gold)" strokeWidth="2.4" strokeLinecap="round" /></svg>
+            <svg viewBox="0 0 46 46" fill="none"><circle cx="23" cy="23" r="18" stroke="var(--gold)" strokeWidth="2.6" /><text x="23" y="31" textAnchor="middle" fontFamily="var(--font-display)" fontSize="22" fontWeight="700" fill="var(--gold)">$</text></svg>
             <div><b>Profit-share income</b><span>Earn on real AI projects worldwide</span></div>
           </div>
         </div>
